@@ -3,8 +3,8 @@ import homeController from '../controller/homeController'
 let router = express.Router();
 
 const initWebRoute = (app) => {
-    router.get('/', homeController.getHomepage)
-
+    router.get('/', homeController.getHomePage)
+    router.get('/detail/user/:userId', homeController.getDetailUser)
     router.get('/about', (req, res) => {
         res.send('Tuan day, hello');
     })

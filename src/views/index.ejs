@@ -7,7 +7,36 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <h1>hello world from ejs</h1>
-    <img width="100%" src="/image/clock.png" />
+    <ul>
+      <li><a class="active" href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="list-user">
+      <h2>List User:</h2>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Action</th>
+        </tr>
+        <% for (var i = 0; i < dataUsers.length; i++) { %>
+        <tr>
+          <td><%= dataUsers[i].Id %></td>
+          <td><%= dataUsers[i].firstName %></td>
+          <td><%= dataUsers[i].lastName %></td>
+          <td>
+            <a href="/detail/user/<%= dataUsers[i].Id %>" target="_blank"
+              >Detail</a
+            >
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
   </body>
 </html>
