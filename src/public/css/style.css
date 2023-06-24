@@ -10,7 +10,10 @@ padding: 0;
 overflow: hidden;
 background-color: #333;
 }
-  
+.list-user h2{
+  margin: 20px 0px;
+}
+
 li {
 float: left;
 }
@@ -33,17 +36,31 @@ background-color: #04AA6D;
 }
 
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin: auto;
+}
   
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.create-user label{
+  display: block;
+}
+.create-user{
+  text-align: center;
+  margin: 30px 0px;
+}
+.create-user .btn-submit{
+  cursor: pointer;
+  margin-top: 15px;
+  padding: 5px;
+}

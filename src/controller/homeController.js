@@ -9,7 +9,15 @@ const getDetailUser = async (req, res) => {
     console.log(user);
     return res.send(JSON.stringify(user))
 }
+
+const createNewUser = async (req, res) => {
+    let { firstName, lastName, email, address } = req.body;
+
+    await connection.execute(`insert into users(firstName, lastName, email, address) values('${firstName}', '${lastName}', '${email}', '${address}')`)
+    return res.redirect('/');
+}
 module.exports = {
     getHomePage,
-    getDetailUser
+    getDetailUser,
+    createNewUser
 }

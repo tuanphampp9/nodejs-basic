@@ -2,8 +2,10 @@ import express from 'express'
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
 import 'dotenv/config'
-const path = require('path');
 const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 const port = process.env.PORT;
 configViewEngine(app);
 initWebRoute(app);
