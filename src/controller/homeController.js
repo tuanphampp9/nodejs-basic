@@ -1,4 +1,7 @@
 import connection from "../configs/connectDB";
+import multer from "multer";
+import path from 'path'
+import appRootPath from "app-root-path";
 const getHomePage = async (req, res) => {
     const [rows, fields] = await connection.execute('SELECT * FROM users');
     return res.render('index.ejs', { dataUsers: rows });
@@ -32,11 +35,58 @@ const saveUser = async (req, res) => {
     await connection.execute(`update users set firstName = '${firstName}', lastName='${lastName}', email ='${email}' , address='${address}' where Id = ${id}`)
     return res.redirect('/');
 }
+const uploadFile = (req, res) => {
+    return res.render('uploadFile.ejs');
+}
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, appRootPath + '/src/public/image')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+const upload = multer({ storage: storage })
+const imageFilter = function (req, file, cb) {
+    // Accept images only
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+        req.fileValidationError = 'Only image files are allowed!';
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+const handleFileUpload = (req, res) => {
+    // 'profile_pic' is the name of our file input field in the HTML form
+    let upload = multer({ storage: storage, fileFilter: imageFilter }).single('profile_pic');
+    upload(req, res, function (err) {
+        // req.file contains information of uploaded file
+        // req.body contains information of text fields, if there were any
+        console.log(req.file);
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        }
+        else if (!req.file) {
+            return res.send('Please select an image to upload');
+        }
+        else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        }
+        else if (err) {
+            return res.send(err);
+        }
+
+        // Display uploaded image for user validation
+        res.send(`You have uploaded this image: <hr/><img src="/image/${req.file.filename}" width="500"><hr /><a href="/upload">Upload another image</a>`);
+    });
+}
+
 module.exports = {
     getHomePage,
     getDetailUser,
     createNewUser,
     deleteUser,
     updateUser,
-    saveUser
+    saveUser,
+    uploadFile,
+    handleFileUpload
 }

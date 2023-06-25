@@ -64,3 +64,14 @@ tr:nth-child(even) {
   margin-top: 15px;
   padding: 5px;
 }
+
+.upload-file-container{
+  padding: 15px;
+}
+.upload-file-container button{
+  margin-top: 15px;
+  cursor: pointer;
+}
+.upload-file-container label{
+  display: block;
+}
