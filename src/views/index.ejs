@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Nodejs basic</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
@@ -31,8 +31,18 @@
             <a href="/detail/user/<%= dataUsers[i].Id %>" target="_blank"
               >Detail</a
             >
-            <button>Edit</button>
-            <button>Delete</button>
+            <form action="/update-user/<%= dataUsers[i].Id %>" method="GET">
+              <button type="submit">Edit</button>
+            </form>
+            <form action="/delete-user" method="POST">
+              <input
+                type="text"
+                value="<%= dataUsers[i].Id %>"
+                name="userId"
+                hidden
+              />
+              <button type="submit">Delete</button>
+            </form>
           </td>
         </tr>
         <% } %>

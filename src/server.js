@@ -1,6 +1,7 @@
 import express from 'express'
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
+import initApiRoute from './route/api';
 import 'dotenv/config'
 const app = express()
 
@@ -9,6 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 const port = process.env.PORT;
 configViewEngine(app);
 initWebRoute(app);
+initApiRoute(app);
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

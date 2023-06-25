@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update user</title>
+  </head>
+  <body>
+    <div class="update-user">
+      <form action="/save-user/<%= dataUser[0].Id %>" method="POST">
+        <div>
+          <label>FirstName</label>
+          <input
+            type="text"
+            name="firstName"
+            value="<%= dataUser[0].firstName %>"
+          />
+        </div>
+        <div>
+          <label>LastName</label>
+          <input
+            type="text"
+            name="lastName"
+            value="<%= dataUser[0].lastName %>"
+          />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" value="<%= dataUser[0].email %>" />
+        </div>
+        <div>
+          <label>Address</label>
+          <input type="text" name="address" value="<%= dataUser[0].address%>" />
+        </div>
+        <button class="btn-submit" type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
