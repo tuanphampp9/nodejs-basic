@@ -46,7 +46,6 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
-const upload = multer({ storage: storage })
 const imageFilter = function (req, file, cb) {
     // Accept images only
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
@@ -80,6 +79,38 @@ const handleFileUpload = (req, res) => {
     });
 }
 
+const handleUploadMultipleFiles = (req, res, error) => {
+    let upload = multer({ storage: storage, fileFilter: imageFilter }).array('multiple_images', 3);
+    if (error) {
+        return res.send("Limit unexpected files!");
+    }
+    upload(req, res, function (err) {
+        console.log(req.files[0]);
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        }
+        else if (!req.files) {
+            return res.send('Please select an image to upload');
+        }
+        else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        }
+        else if (err) {
+            return res.send(err);
+        }
+
+        let result = "You have uploaded these images: <hr />";
+        const files = req.files;
+        let index, len;
+
+        // Loop through all the uploaded images and display them on frontend
+        for (index = 0, len = files.length; index < len; ++index) {
+            result += `<img src="/image/${files[index].filename}" width="300" style="margin-right: 20px;">`;
+        }
+        result += '<hr/><a href="/upload">Upload more images</a>';
+        res.send(result);
+    });
+}
 module.exports = {
     getHomePage,
     getDetailUser,
@@ -88,5 +119,6 @@ module.exports = {
     updateUser,
     saveUser,
     uploadFile,
-    handleFileUpload
+    handleFileUpload,
+    handleUploadMultipleFiles
 }

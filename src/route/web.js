@@ -11,6 +11,7 @@ const initWebRoute = (app) => {
     router.post('/save-user/:id', homeController.saveUser);
     router.get('/upload', homeController.uploadFile)
     router.post('/upload-profile-pic', homeController.handleFileUpload)
+    router.post('/upload-multiple-images', homeController.handleUploadMultipleFiles)
     return app.use('/', router);
 }
 
