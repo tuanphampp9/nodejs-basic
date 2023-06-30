@@ -25,12 +25,12 @@
           <td><%= dataUsers[i].Id %></td>
           <td><%= dataUsers[i].firstName %></td>
           <td><%= dataUsers[i].lastName %></td>
-          <td>
+          <td class="btn-box">
             <a href="/detail/user/<%= dataUsers[i].Id %>" target="_blank"
               >Detail</a
             >
             <form action="/update-user/<%= dataUsers[i].Id %>" method="GET">
-              <button type="submit">Edit</button>
+              <button type="submit" class="btn-edit">Edit</button>
             </form>
             <form action="/delete-user" method="POST">
               <input

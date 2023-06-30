@@ -75,3 +75,10 @@ tr:nth-child(even) {
 .upload-file-container label{
   display: block;
 }
+.btn-box{
+  display: flex;
+  align-items: center;
+}
+.btn-edit{
+  margin: 0px 10px;
+}
